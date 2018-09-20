@@ -5,7 +5,12 @@
   "repository": "https://github.com/kinddfull/facebook-messenger",
   "author": "kinddfull",
   "license": "MIT",
+  "scripts": {
+    "tsc--watch": "tsc -w",
+    "test--watch": "nodemon --watch lib/ --watch test.js test.js"
+  },
   "dependencies": {
+    "@types/node": "^10.10.1",
     "ts-node": "^7.0.1"
   },
   "devDependencies": {
