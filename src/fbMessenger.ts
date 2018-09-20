@@ -1,10 +1,15 @@
-import { ConfigModel } from './model/ConfigModel'
-import client from './client'
+import * as Http from 'http'
 
-class bot extends client {
-  constructor(config: ConfigModel) {
-    super(config)
+import { ConfigModel, AppConfigModel } from './model/ConfigModel'
+import appConfig from './config/appConfig'
+import bot from './bot'
+
+class fbMessenger extends bot {
+  config: AppConfigModel
+  constructor(config: ConfigModel, server?: Http.Server) {
+    super(server)
+    this.config = appConfig(config)
   }
 }
 
-export = bot
+export = fbMessenger
