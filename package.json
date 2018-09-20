@@ -4,5 +4,12 @@
   "description": "facebook messenger bot library",
   "repository": "https://github.com/kinddfull/facebook-messenger",
   "author": "kinddfull",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^7.0.1"
+  },
+  "devDependencies": {
+    "tslint-config-airbnb": "^5.11.0",
+    "typescript": "^3.0.3"
+  }
 }
