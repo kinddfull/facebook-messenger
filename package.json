@@ -1,0 +1,8 @@
+{
+  "name": "facebook-messenger",
+  "version": "1.0.0",
+  "description": "facebook messenger bot library",
+  "repository": "https://github.com/kinddfull/facebook-messenger",
+  "author": "kinddfull",
+  "license": "MIT"
+}
