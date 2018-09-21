@@ -30,10 +30,6 @@ export default class serverConfig {
     }
   }
 
-  private createServer() {
-    this.server = Http.createServer(this.requestCallback)
-  }
-
   setWebhook(webhookUrl: string) {
     this.webhook = webhookUrl
     return function(req, res, next) {
@@ -41,6 +37,11 @@ export default class serverConfig {
       if (path == this.webhook) return
       next()
     }.bind(this)
+  }
+
+  private createServer() {
+    console.log('create')
+    this.server = Http.createServer(this.requestCallback)
   }
 
   private connectServer(server: Http.Server) {
@@ -90,7 +91,9 @@ export default class serverConfig {
   ) => {
     const { method } = req
     const { path, query } = parseUrl(req.url)
-    isSame(path, 'asdf')
+    console.log(this.webhook)
+    console.log(path)
+    isSame(path, this.webhook)
       ? method === 'GET'
         ? this.requestGET(res, query)
         : method === 'POST'

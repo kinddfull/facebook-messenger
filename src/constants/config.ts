@@ -6,4 +6,4 @@ export const Endpoint = 'https://graph.facebook.com'
 
 export const EndpointVersion = 'v2.8'
 
-export const WebhookUrl = 'webhook'
+export const WebhookUrl = '/webhook'
