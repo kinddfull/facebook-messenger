@@ -1,7 +1,7 @@
-import { ConfigModel } from '../model/ConfigModel'
+import { AppConfigModel } from '../model/ConfigModel'
 import { AppConfigKey, PageConfigKey } from '../constants/config'
 
-export const configKeyValidation = (config: ConfigModel) => {
+export const configKeyValidation = (config: AppConfigModel) => {
   if (!config) throw new Error('config is not defined')
   const configKeys = Object.keys(config)
   if (!configKeys.length) throw new Error('config is empty')
@@ -13,7 +13,7 @@ export const configKeyValidation = (config: ConfigModel) => {
   })
 }
 
-export const configValueValidation = (config: ConfigModel) => {
+export const configValueValidation = (config: AppConfigModel) => {
   return Object.entries(config).every(([key, value]) => {
     return isValueCheck(key, value) ? typeCheck(key, value, 'string') : false
   })

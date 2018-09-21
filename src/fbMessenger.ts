@@ -1,14 +1,19 @@
 import * as Http from 'http'
 
-import { ConfigModel, AppConfigModel } from './model/ConfigModel'
-import appConfig from './config/appConfig'
+import { AppConfigModel } from './model/ConfigModel'
 import bot from './bot'
 
 class fbMessenger extends bot {
-  config: AppConfigModel
-  constructor(config: ConfigModel, server?: Http.Server) {
-    super(server)
-    this.config = appConfig(config)
+  constructor(config: AppConfigModel, server?: Http.Server) {
+    super(config, server)
+  }
+
+  webhook(webhookUrl: string) {
+    return this.server.setWebhook(webhookUrl)
+  }
+
+  listen(port: string & number) {
+    this.server.listen(port)
   }
 }
 

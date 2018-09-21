@@ -1,4 +1,4 @@
-export interface ConfigModel {
+export interface AppConfigModel {
   appSecret: string
   accessToken: string
   verifyToken: string
@@ -6,7 +6,8 @@ export interface ConfigModel {
   pageToken?: string
 }
 
-export interface AppConfigModel extends ConfigModel {
+export interface ServerConfigModel {
+  verifyToken: string
   endpoint: string
   version: string
   webhook: string
