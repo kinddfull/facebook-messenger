@@ -11,6 +11,7 @@ import {
   validationSignature,
 } from './utils'
 import { AppConfigModel, ClientConfigModel, RequestQueryModel } from './model'
+import { Event } from './event'
 
 export default class client {
   server: Http.Server
@@ -96,7 +97,11 @@ export default class client {
   private handleEvent = (data, signature) => {
     validationSignature(this.appSecret, signature)
     const event = parseEvent(data)
-    console.log(event.getEventType())
+    this.emitEvent(event.getEventType(), event.getSenderId(), event)
+  }
+
+  private emitEvent = (eventType, id, message: Event) => {
+    this.server.emit(eventType, id, message)
   }
 
   private requestCallback = (

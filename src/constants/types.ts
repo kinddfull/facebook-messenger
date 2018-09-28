@@ -1,13 +1,14 @@
-export const eventTypes = [
-  'message',
-  'delivery',
-  'read',
-  'postback',
-  'option',
-  'reteral',
-  'payment',
-  'checkout_update',
-  'account_linking',
-]
+export const EventTypes = {
+  MESSAGE: 'message',
+  MESSAGE_DELIVERED: 'delivery',
+  MESSAGE_READ: 'read',
+  MESSAGE_ECHO: 'echo',
+  POSTBACK: 'postback',
+  OPTIN: 'optin',
+  REFERRAL: 'referral',
+  PAYMENTS: 'payment',
+  CHECKOUT_UPDATE: 'checkout_update',
+  ACCOUNT_LINKING: 'account_linking',
+}
 
-export const messageTypes = ['quick_reply', 'text', 'attachments']
+export const MessageTypes = ['quick_reply', 'text', 'attachments']
