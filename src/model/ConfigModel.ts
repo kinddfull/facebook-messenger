@@ -6,9 +6,8 @@ export interface AppConfigModel {
   pageToken?: string
 }
 
-export interface ServerConfigModel {
-  verifyToken: string
+export interface ClientConfigModel {
+  webhook: string
   endpoint: string
   version: string
-  webhook: string
 }

@@ -32,3 +32,8 @@ const typeCheck = (key: string, value: any, type: string) => {
   }
   return true
 }
+
+export const validationSignature = (appSecret, signature) => {
+  if (!signature) throw new Error('signature is empty')
+  return true
+}

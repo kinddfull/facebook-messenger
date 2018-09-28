@@ -5,12 +5,17 @@
   "repository": "https://github.com/kinddfull/facebook-messenger",
   "author": "kinddfull",
   "license": "MIT",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
   "scripts": {
     "tsc--watch": "tsc -w",
     "test--watch": "nodemon --watch lib/ --watch test.js test.js"
   },
   "dependencies": {
     "@types/node": "^10.10.1",
+    "express": "^4.16.3",
+    "facebook-bot-messenger": "^1.0.8",
     "ts-node": "^7.0.1"
   },
   "devDependencies": {
