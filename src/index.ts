@@ -1,5 +1,8 @@
-import { EventTypes } from './constants/types'
+// import { EventTypes } from './constants/types'
+// import fbMessenger from './fbMessenger'
 
-exports.FbM = require('./fbMessenger')
+// exports.FbM = fbMessenger
+// exports.EventTypes = EventTypes
 
-exports.EventTypes = EventTypes
+export * from './fbMessenger'
+export * from './constants/types'

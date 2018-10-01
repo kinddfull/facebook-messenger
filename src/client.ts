@@ -35,7 +35,10 @@ export default class client {
     this.server.on('request', this.requestCallback)
   }
 
-  public subscribe = (eventType: string, listener: () => void) => {
+  public subscribe = (
+    eventType: string,
+    listener: (userId, message) => Promise<void>
+  ) => {
     return this.server.on(eventType, listener)
   }
 
