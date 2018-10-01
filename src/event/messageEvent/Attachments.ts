@@ -1,7 +1,7 @@
-import { Message } from './Message'
-import { AttachmentsModel } from '../../model/EventModel'
+import Message from './Message'
+import { AttachmentsModel, MessageModel } from '../../model/EventModel'
 
-export class Attachments extends Message<AttachmentsModel> {
+export default class Attachments extends Message<AttachmentsModel> {
   getAttachments() {
     return this.messaging.message.attachment
   }

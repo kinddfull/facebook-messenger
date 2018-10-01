@@ -1,7 +1,7 @@
-import { Message } from './'
+import Message from './Message'
 import { ReplyModel } from '../../model/EventModel'
 
-export class Reply extends Message<ReplyModel> {
+export default class Reply extends Message<ReplyModel> {
   getPayload() {
     return this.messaging.message.quick_reply.payload
   }

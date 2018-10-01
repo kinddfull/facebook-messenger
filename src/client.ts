@@ -1,5 +1,5 @@
 import * as Http from 'http'
-// import * as request from 'request'
+import * as request from 'request-promise'
 
 import { WebhookUrl, Endpoint, EndpointVersion } from './constants/config'
 import {
@@ -11,7 +11,7 @@ import {
   validationSignature,
 } from './utils'
 import { AppConfigModel, ClientConfigModel, RequestQueryModel } from './model'
-import { Event } from './event'
+import Event from './event/BaseEvent'
 
 export default class client {
   server: Http.Server
@@ -36,7 +36,7 @@ export default class client {
   }
 
   public subscribe = (eventType: string, listener: () => void) => {
-    this.server.on(eventType, listener)
+    return this.server.on(eventType, listener)
   }
 
   private setClientConfig = (): ClientConfigModel => {
@@ -73,25 +73,22 @@ export default class client {
     }
     res.end('verify token not found')
   }
-  private handlePOST = async (
-    req: Http.ServerRequest,
-    res: Http.ServerResponse
-  ) => {
+  private handlePOST = (req: Http.ServerRequest, res: Http.ServerResponse) => {
     req.setEncoding('utf-8')
     let data
-    try {
-      req.on('data', async chunk => {
+    req.on('data', async chunk => {
+      try {
         data = await JSON.parse(chunk)
         const { headers } = req
         const signature = headers['x-hub-signature']
         this.handleEvent(data, signature)
         res.statusCode = 200
         res.end('event received')
-      })
-    } catch (e) {
-      console.log('error', e.message)
-      res.end(e.message)
-    }
+      } catch (e) {
+        console.log('error', e.message)
+        res.end(e.message)
+      }
+    })
   }
 
   private handleEvent = (data, signature) => {
@@ -130,28 +127,61 @@ export default class client {
     })
   }
 
-  public requestGet = (url: string) => {
+  private requestGet = (url: string) => {
     return this.sendRequest('GET', url)
   }
 
-  public requestPost = (url: string, body: any) => {
-    return this.sendRequest('POST', url, body)
+  private requestPost = (url: string, body: any) => {
+    const header = {
+      'Content-Type': 'application/json; charset=utf-8',
+    }
+    return this.sendRequest('POST', url, header, body)
   }
 
-  private sendRequest = async (method: string, url: string, body?: any) => {
-    // const options = Object.assign(
-    //   {
-    //     method,
-    //     url,
-    //     json: true,
-    //   },
-    //   { body }
-    // )
-    // try {
-    //   const result = await request(options)
-    //   return result
-    // } catch (e) {
-    //   console.log(e.message)
-    // }
+  protected sendMessage = (recipientId, message) => {
+    const url = this.endpoint + '/' + this.version + '/me/messages'
+
+    const messageData = {
+      recipient: { id: recipientId },
+      message,
+    }
+    return this.requestPost(url, messageData)
+  }
+  private sendRequest = (
+    method: string,
+    url: string,
+    header?: object,
+    body: any = {}
+  ) => {
+    const options = {
+      method,
+      url,
+      qs: {
+        access_token: this.accessToken,
+      },
+      headers: header,
+      json: true,
+      body,
+    }
+    try {
+      return request(options, (err, res, body) => {
+        if (!err && res.statusCode == 200) {
+          return {
+            result: body,
+            statusCode: res.statusCode,
+          }
+        } else {
+          return {
+            result: body.error,
+            statusCode: res.statusCode,
+          }
+        }
+      })
+    } catch (e) {
+      return {
+        result: e.message,
+        statusCode: 500,
+      }
+    }
   }
 }

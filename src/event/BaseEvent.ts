@@ -1,16 +1,27 @@
 import {
-  MessagingModel,
   TextModel,
   AttachmentsModel,
   ReplyModel,
+  EventModel,
+  MessageModel,
+  ReadModel,
+  DeliveryModel,
+  EchoModel,
 } from '../model/EventModel'
 
-export class Event<T = TextModel | AttachmentsModel | ReplyModel> {
+type defaultEventModel =
+  | MessageModel<TextModel>
+  | MessageModel<ReplyModel>
+  | MessageModel<AttachmentsModel>
+  | DeliveryModel
+  | ReadModel
+  | EchoModel
+export default class Event<T = defaultEventModel> {
   id: string
   time: string
-  messaging: MessagingModel<T>
+  messaging: EventModel & T
   eventType: string
-  constructor(id: string, time: string, messaging: MessagingModel<T>) {
+  constructor(id: string, time: string, messaging: EventModel & T) {
     this.id = id
     this.time = time
     this.messaging = messaging
@@ -21,9 +32,6 @@ export class Event<T = TextModel | AttachmentsModel | ReplyModel> {
   }
   getTime() {
     return this.time
-  }
-  getMessaging() {
-    return this.messaging
   }
 
   getSenderId() {

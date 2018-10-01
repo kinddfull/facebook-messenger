@@ -1,8 +1,8 @@
 import client from './client'
 
 class fbMessenger extends client {
-  sendMessage() {
-    return 'asdf'
+  sendTextMessage = (senderId, textMessage) => {
+    return this.sendMessage(senderId, { text: textMessage })
   }
 }
 

@@ -1,4 +1,9 @@
-export interface MessagingModel<T> {
+interface MessageInfoModel {
+  mid: string
+  seq: string
+}
+
+export interface EventModel {
   sender: {
     id: string
   }
@@ -6,14 +11,7 @@ export interface MessagingModel<T> {
     id: string
   }
   timestamp: string
-  message: MessageModel & T
 }
-
-export interface MessageModel {
-  mid: string
-  seq: string
-}
-
 export interface ReplyModel {
   text: string
   quick_reply: {
@@ -28,10 +26,26 @@ export interface AttachmentsModel {
   }
 }
 
+export interface MessageModel<T> extends EventModel {
+  message: T & MessageInfoModel
+}
+
 export interface TextModel {
   text: string
 }
 
-export interface EchoModel {
+export interface EchoModel extends EventModel {
   is_echo: string
+}
+
+export interface DeliveryModel extends EventModel {
+  delivery: {
+    watermark: number
+  } & MessageInfoModel
+}
+
+export interface ReadModel extends EventModel {
+  read: {
+    watermark: number
+  } & MessageInfoModel
 }

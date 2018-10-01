@@ -1,8 +1,8 @@
 export const EventTypes = {
   MESSAGE: 'message',
-  MESSAGE_DELIVERED: 'delivery',
-  MESSAGE_READ: 'read',
-  MESSAGE_ECHO: 'echo',
+  DELIVERY: 'delivery',
+  READ: 'read',
+  ECHO: 'echo',
   POSTBACK: 'postback',
   OPTIN: 'optin',
   REFERRAL: 'referral',
