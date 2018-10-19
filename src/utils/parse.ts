@@ -53,6 +53,6 @@ const parseMessageEvent = (id: string, time: string, messaging): Event => {
   const { message } = messaging
   const messageType = getMessageType(message)
   if (messageType === 'text') return new Text(id, time, messaging)
-  if (messageType === 'attachment') return new Attachments(id, time, messaging)
+  if (messageType === 'attachments') return new Attachments(id, time, messaging)
   if (messageType === 'quick_reply') return new Reply(id, time, messaging)
 }

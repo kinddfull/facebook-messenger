@@ -12,6 +12,7 @@ import {
 } from './utils'
 import { AppConfigModel, ClientConfigModel, RequestQueryModel } from './model'
 import Event from './event/BaseEvent'
+import { ReplyInfoModel } from './model/EventModel'
 
 export default class client {
   server: Http.Server
@@ -146,7 +147,7 @@ export default class client {
 
     const messageData = {
       recipient: { id: recipientId },
-      message,
+      message: { text: message },
     }
     return this.requestPost(url, messageData)
   }
@@ -159,6 +160,43 @@ export default class client {
       sender_action: action,
     }
     return this.requestPost(url, actionData)
+  }
+
+  protected sendAttachment = (recipientId, { type, payload_url, reusable }) => {
+    const url = this.endpoint + '/' + this.version + '/me/messages'
+
+    const attachmentData = {
+      recipient: { id: recipientId },
+      message: {
+        attachment: {
+          type,
+          payload: {
+            url: payload_url,
+            is_reusable: reusable,
+          },
+        },
+      },
+    }
+
+    return this.requestPost(url, attachmentData)
+  }
+
+  protected sendQuickReply = (
+    recipientId,
+    text: string,
+    replies: ReplyInfoModel[]
+  ) => {
+    const url = this.endpoint + '/' + this.version + '/me/messages'
+
+    const quickReplyData = {
+      recipient: { id: recipientId },
+      message: {
+        text,
+        quick_replies: replies,
+      },
+    }
+    console.log(quickReplyData)
+    return this.requestPost(url, quickReplyData)
   }
 
   private sendRequest = (

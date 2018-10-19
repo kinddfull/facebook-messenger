@@ -19,13 +19,23 @@ export interface ReplyModel {
   }
 }
 
-export interface AttachmentsModel {
-  attachment: {
-    type: string
-    payload: object
-  }
+export interface ReplyInfoModel {
+  content_type: string
+  title: string
+  payload: string
+  imageUrl?: string
 }
 
+export interface AttachmentsModel {
+  attachments: AttachmentsInfoModel[]
+}
+
+export interface AttachmentsInfoModel {
+  type: string
+  payload: {
+    url
+  }
+}
 export interface MessageModel<T> extends EventModel {
   message: T & MessageInfoModel
 }
