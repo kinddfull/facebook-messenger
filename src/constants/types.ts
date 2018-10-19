@@ -11,4 +11,9 @@ export const EventTypes = {
   ACCOUNT_LINKING: 'account_linking',
 }
 
+export const ActionTypes = {
+  TYPING_ON: 'typing_on',
+  TYPING_OFF: 'typing_off',
+}
+
 export const MessageTypes = ['quick_reply', 'text', 'attachments']

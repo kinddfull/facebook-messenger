@@ -17,9 +17,15 @@ const app = new fbMessenger(config, server)
 
 express.use(app.setWebhook('/webhook'))
 
-app.subscribe(EventTypes.MESSAGE, async (userId, message) => {
-  if (message.isText()) {
-    return await app.sendTextMessage(userId, message.getText())
+app.subscribe(EventTypes.MESSAGE, async (userId: string, message) => {
+  try {
+    await app.sendTypingOn(userId)
+    if (message.isText()) {
+      return await app.sendTextMessage(userId, message.getText())
+    }
+  } catch {
+  } finally {
+    await app.sendTypingOff(userId)
   }
 })
 

@@ -150,6 +150,17 @@ export default class client {
     }
     return this.requestPost(url, messageData)
   }
+
+  protected sendAction = (recipientId, action) => {
+    const url = this.endpoint + '/' + this.version + '/me/messages'
+
+    const actionData = {
+      recipient: { id: recipientId },
+      sender_action: action,
+    }
+    return this.requestPost(url, actionData)
+  }
+
   private sendRequest = (
     method: string,
     url: string,
