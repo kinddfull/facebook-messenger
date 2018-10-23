@@ -22,4 +22,8 @@ export class fbMessenger extends client {
   sendReply = (senderId, replies: ReplyMessageModel) => {
     return this.sendQuickReply(senderId, replies)
   }
+
+  getUserProfile = userId => {
+    return this.getUser(userId)
+  }
 }

@@ -148,7 +148,7 @@ export default class client {
   }
 
   protected sendMessage = (recipientId, message) => {
-    const url = this.endpoint + '/' + this.version + '/me/messages'
+    const url = `${this.endpoint}/${this.version}/me/messages`
 
     const messageData = {
       recipient: { id: recipientId },
@@ -158,7 +158,7 @@ export default class client {
   }
 
   protected sendAction = (recipientId, action) => {
-    const url = this.endpoint + '/' + this.version + '/me/messages'
+    const url = `${this.endpoint}/${this.version}/me/messages`
 
     const actionData = {
       recipient: { id: recipientId },
@@ -168,7 +168,7 @@ export default class client {
   }
 
   protected sendAttachment = (recipientId, { type, payload_url, reusable }) => {
-    const url = this.endpoint + '/' + this.version + '/me/messages'
+    const url = `${this.endpoint}/${this.version}/me/messages`
 
     const attachmentData = {
       recipient: { id: recipientId },
@@ -190,7 +190,7 @@ export default class client {
     recipientId,
     { text, quick_replies }: ReplyMessageModel
   ) => {
-    const url = this.endpoint + '/' + this.version + '/me/messages'
+    const url = `${this.endpoint}/${this.version}/me/messages`
 
     const quickReplyData = {
       recipient: { id: recipientId },
@@ -201,6 +201,14 @@ export default class client {
     }
     console.log(quickReplyData)
     return this.requestPost(url, quickReplyData)
+  }
+
+  protected getUser = userId => {
+    const url = `${
+      this.endpoint
+    }/${userId}?fields=name,profile_pic,gender&access_token=${this.pageToken}`
+
+    return this.requestGet(url)
   }
 
   private sendRequest = (
