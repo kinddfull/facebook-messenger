@@ -1,6 +1,6 @@
 const express = require('express')()
 
-import { fbMessenger, EventTypes, Message } from './lib'
+import { fbMessenger, EventTypes, MessageType, ReplyMessage } from './lib'
 const { APP_SECRET, ACCESS_TOKEN, VERIFY_TOKEN } = process.env
 
 const config = {
@@ -17,10 +17,14 @@ const app = new fbMessenger(config, server)
 
 express.use(app.setWebhook('/webhook'))
 
-app.subscribe(EventTypes.MESSAGE, async (userId: string, message: Message) => {
-  return await app.sendTextMessage(userId, message.getText())
-})
+app.subscribe(
+  EventTypes.MESSAGE,
+  async (userId: string, message: MessageType) => {
+    const quick_replies = new ReplyMessage('test')
+    await app.sendReply(userId, quick_replies.makeMessage())
+  }
+)
 
 server.listen(port, () => {
   console.log('listen')
-})
+}

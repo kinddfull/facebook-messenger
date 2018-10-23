@@ -10,9 +10,14 @@ import {
   parseEvent,
   validationSignature,
 } from './utils'
-import { AppConfigModel, ClientConfigModel, RequestQueryModel } from './model'
+import {
+  AppConfigModel,
+  ClientConfigModel,
+  RequestQueryModel,
+  ReplyInfoModel,
+  ReplyMessageModel,
+} from './model'
 import Event from './event/BaseEvent'
-import { ReplyInfoModel } from './model/EventModel'
 
 export default class client {
   server: Http.Server
@@ -183,8 +188,7 @@ export default class client {
 
   protected sendQuickReply = (
     recipientId,
-    text: string,
-    replies: ReplyInfoModel[]
+    { text, quick_replies }: ReplyMessageModel
   ) => {
     const url = this.endpoint + '/' + this.version + '/me/messages'
 
@@ -192,7 +196,7 @@ export default class client {
       recipient: { id: recipientId },
       message: {
         text,
-        quick_replies: replies,
+        quick_replies,
       },
     }
     console.log(quickReplyData)

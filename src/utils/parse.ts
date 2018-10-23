@@ -8,9 +8,9 @@ import {
 } from '../model/EventModel'
 import { findObject } from './util'
 import Event from '../event/BaseEvent'
-import Reply from '../event/messageEvent/Reply'
-import Text from '../event/messageEvent/Text'
-import Attachments from '../event/messageEvent/Attachments'
+import Reply from '../event/message/Reply'
+import Text from '../event/message/Text'
+import Attachments from '../event/message/Attachments'
 import Delivery from '../event/Delivery'
 import Read from '../event/Read'
 

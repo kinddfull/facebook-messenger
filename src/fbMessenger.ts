@@ -1,6 +1,6 @@
 import client from './client'
 import { ActionTypes } from './constants/types'
-import { ReplyInfoModel } from './model/EventModel'
+import { ReplyMessageModel } from './model'
 
 export class fbMessenger extends client {
   sendTextMessage = (senderId, textMessage) => {
@@ -19,7 +19,7 @@ export class fbMessenger extends client {
     return this.sendAttachment(senderId, attachment)
   }
 
-  sendReply = (senderId, string, replies: ReplyInfoModel[]) => {
-    return this.sendQuickReply(senderId, string, replies)
+  sendReply = (senderId, replies: ReplyMessageModel) => {
+    return this.sendQuickReply(senderId, replies)
   }
 }
