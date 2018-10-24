@@ -41,6 +41,14 @@ export default class client {
     this.server.on('request', this.requestCallback)
   }
 
+  public getPageInfo = () => {
+    const { pageId, pageToken } = this
+    return {
+      pageId,
+      pageToken,
+    }
+  }
+
   public subscribe = (
     eventType: string,
     listener: (userId, message) => Promise<void>
@@ -199,7 +207,6 @@ export default class client {
         quick_replies,
       },
     }
-    console.log(quickReplyData)
     return this.requestPost(url, quickReplyData)
   }
 

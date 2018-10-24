@@ -1,6 +1,6 @@
 import client from './client'
 import { ActionTypes } from './constants/types'
-import { ReplyMessageModel } from './model'
+import { ReplyMessageModel, UserProfileModel } from './model'
 
 export class fbMessenger extends client {
   sendTextMessage = (senderId, textMessage) => {
@@ -23,7 +23,7 @@ export class fbMessenger extends client {
     return this.sendQuickReply(senderId, replies)
   }
 
-  getUserProfile = userId => {
+  getUserProfile = (userId): UserProfileModel => {
     return this.getUser(userId)
   }
 }

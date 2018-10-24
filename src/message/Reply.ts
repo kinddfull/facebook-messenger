@@ -55,7 +55,7 @@ export class ReplyMessage extends Message {
     return this.options
   }
 
-  makeMessage() {
+  buildReply() {
     return {
       text: this.text,
       quick_replies: this.options,
