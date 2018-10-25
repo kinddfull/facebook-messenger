@@ -21,8 +21,8 @@ import Event from './event/BaseEvent'
 
 export default class client {
   server: Http.Server
-  endpoint: string
-  version: string
+  private endpoint: string
+  private version: string
   private verifyToken: string
   private webhookUrl: string
   private appSecret: string
@@ -41,11 +41,15 @@ export default class client {
     this.server.on('request', this.requestCallback)
   }
 
-  public getPageInfo = () => {
-    const { pageId, pageToken } = this
+  protected appInfo() {
     return {
-      pageId,
-      pageToken,
+      endpoint: this.endpoint,
+      version: this.version,
+      verifyToken: this.verifyToken,
+      appSecret: this.appSecret,
+      accessToken: this.accessToken,
+      pageId: this.pageId,
+      pageToken: this.pageToken,
     }
   }
 

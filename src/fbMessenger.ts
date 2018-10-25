@@ -26,4 +26,8 @@ export class fbMessenger extends client {
   getUserProfile = (userId): UserProfileModel => {
     return this.getUser(userId)
   }
+
+  getAppInfo = () => {
+    return this.appInfo()
+  }
 }

@@ -20,8 +20,9 @@ express.use(app.setWebhook('/webhook'))
 app.subscribe(
   EventTypes.MESSAGE,
   async (userId: string, message: MessageType) => {
+    console.log(message)
     const quick_replies = new ReplyMessage('test')
-    await app.sendReply(userId, quick_replies.makeMessage())
+    await app.sendReply(userId, quick_replies.buildReply())
   }
 )
 
