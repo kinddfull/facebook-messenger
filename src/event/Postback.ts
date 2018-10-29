@@ -8,7 +8,7 @@ export default class Postback extends Event<PostbackModel> {
     this.setEventType(EventTypes.POSTBACK)
   }
 
-  getPostbackData = () => this.messaging.postback.payload
+  getPostbackPayload = () => this.messaging.postback.payload
 
   getPostbackTitle = () => this.messaging.postback.title
 }

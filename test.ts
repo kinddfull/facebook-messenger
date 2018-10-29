@@ -1,6 +1,6 @@
 const express = require('express')()
 
-import { fbMessenger, EventTypes, MessageType, ReplyMessage } from './lib'
+import { fbMessenger, EventTypes, MessageType, PostbackType } from './lib'
 const { APP_SECRET, ACCESS_TOKEN, VERIFY_TOKEN } = process.env
 
 const config = {
@@ -20,12 +20,17 @@ express.use(app.setWebhook('/webhook'))
 app.subscribe(
   EventTypes.MESSAGE,
   async (userId: string, message: MessageType) => {
-    console.log(message)
-    const quick_replies = new ReplyMessage('test')
-    await app.sendReply(userId, quick_replies.buildReply())
+    console.log(userId, message)
+  }
+)
+
+app.subscribe(
+  EventTypes.POSTBACK,
+  async (userId: string, postback: PostbackType) => {
+    console.log(userId, postback)
   }
 )
 
 server.listen(port, () => {
   console.log('listen')
-}
+})

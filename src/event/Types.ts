@@ -12,8 +12,10 @@ import {
   DeliveryModel,
   EchoModel,
 } from '../model/EventModel'
+import Postback from './Postback'
 
 export type MessageType = Attachments & Reply & Text & Read & Delivery
+export type PostbackType = Postback
 
 export type defaultEventModel =
   | MessageModel<TextModel>
