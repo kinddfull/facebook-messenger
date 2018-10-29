@@ -27,8 +27,6 @@ export default class client {
   private webhookUrl: string
   private appSecret: string
   private accessToken: string
-  private pageId?: string
-  private pageToken?: string
   constructor(config: AppConfigModel, server?: Http.Server) {
     configKeyValidation(config)
     configValueValidation(config)
@@ -48,8 +46,6 @@ export default class client {
       verifyToken: this.verifyToken,
       appSecret: this.appSecret,
       accessToken: this.accessToken,
-      pageId: this.pageId,
-      pageToken: this.pageToken,
     }
   }
 
@@ -217,7 +213,7 @@ export default class client {
   protected getUser = userId => {
     const url = `${
       this.endpoint
-    }/${userId}?fields=name,profile_pic,gender&access_token=${this.pageToken}`
+    }/${userId}?fields=name,profile_pic,gender&access_token=${this.accessToken}`
 
     return this.requestGet(url)
   }

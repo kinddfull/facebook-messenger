@@ -1,13 +1,11 @@
 import { AppConfigModel } from '../model/ConfigModel'
-import { AppConfigKey, PageConfigKey } from '../constants/config'
+import { AppConfigKey } from '../constants/config'
 
 export const configKeyValidation = (config: AppConfigModel) => {
   if (!config) throw new Error('config is not defined')
   const configKeys = Object.keys(config)
   if (!configKeys.length) throw new Error('config is empty')
-  const isPageInfo = Boolean(config.pageId || config.pageToken)
-  const DefaultConfigKey = AppConfigKey.concat(isPageInfo ? PageConfigKey : [])
-  return DefaultConfigKey.every(key => {
+  return AppConfigKey.every(key => {
     if (!configKeys.includes(key)) throw new Error(`${key} is not defined`)
     return configKeys.includes(key)
   })

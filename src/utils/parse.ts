@@ -13,6 +13,7 @@ import Text from '../event/message/Text'
 import Attachments from '../event/message/Attachments'
 import Delivery from '../event/Delivery'
 import Read from '../event/Read'
+import Postback from '../event/Postback'
 
 export const parseUrl = (url: string) => {
   const { query, pathname: path } = Url.parse(url, true)
@@ -30,9 +31,13 @@ export const parseEvent = (data): Event => {
   const { id, time } = entry[0]
   const messaging = entry[0].messaging[0]
   const eventType = getEventType(messaging)
-  if (eventType === 'message') event = parseMessageEvent(id, time, messaging)
-  if (eventType === 'delivery') event = new Delivery(id, time, messaging)
-  if (eventType === 'read') event = new Read(id, time, messaging)
+  if (eventType === EventTypes.MESSAGE)
+    event = parseMessageEvent(id, time, messaging)
+  if (eventType === EventTypes.DELIVERY)
+    event = new Delivery(id, time, messaging)
+  if (eventType === EventTypes.READ) event = new Read(id, time, messaging)
+  if (eventType === EventTypes.POSTBACK)
+    event = new Postback(id, time, messaging)
   return event
 }
 

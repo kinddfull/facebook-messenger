@@ -59,3 +59,10 @@ export interface ReadModel extends EventModel {
     watermark: number
   } & MessageInfoModel
 }
+
+export interface PostbackModel extends EventModel {
+  postback: {
+    payload: string
+    title: string
+  }
+}
