@@ -210,10 +210,27 @@ export default class client {
     return this.requestPost(url, quickReplyData)
   }
 
+  protected createBroadcast = messages => {
+    const url = `${this.endpoint}/${this.version}/me/message_creatives`
+    const createBroadCastData = {
+      messages,
+    }
+
+    return this.requestPost(url, createBroadCastData)
+  }
+
+  protected braodcast = broadCastData => {
+    const url = `${this.endpoint}/${this.version}/me/broadcast_messages`
+
+    return this.requestPost(url, broadCastData)
+  }
+
   protected getUser = userId => {
     const url = `${
       this.endpoint
-    }/${userId}?fields=name,profile_pic,gender&access_token=${this.accessToken}`
+    }/${userId}?fields=name,first_name,profile_pic,gender&access_token=${
+      this.accessToken
+    }`
 
     return this.requestGet(url)
   }

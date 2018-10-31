@@ -16,4 +16,10 @@ export const ActionTypes = {
   TYPING_OFF: 'typing_off',
 }
 
+export const notificationType = {
+  REGULAR: 'REGULAR',
+  SILENT_PUSH: 'SILENT_PUSH',
+  NO_PUSH: 'NO_PUSH',
+}
+
 export const MessageTypes = ['quick_reply', 'text', 'attachments']

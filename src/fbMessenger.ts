@@ -3,8 +3,8 @@ import { ActionTypes } from './constants/types'
 import { ReplyMessageModel, UserProfileModel } from './model'
 
 export class fbMessenger extends client {
-  sendTextMessage = (senderId, textMessage) => {
-    return this.sendMessage(senderId, textMessage)
+  sendTextMessage = (senderId, message) => {
+    return this.sendMessage(senderId, message)
   }
 
   sendTypingOn = senderId => this.sendAction(senderId, ActionTypes.TYPING_ON)
@@ -29,5 +29,27 @@ export class fbMessenger extends client {
 
   getAppInfo = () => {
     return this.appInfo()
+  }
+
+  createBroadcastMessage = message => {
+    const messages = [
+      {
+        text: message,
+      },
+    ]
+    return this.createBroadcast(messages)
+  }
+
+  createDynamicBraodcast = message => {
+    const messages = [
+      {
+        dynamic_text: message,
+      },
+    ]
+    return this.createBroadcast(messages)
+  }
+
+  sendBraodcast = broadCastData => {
+    return this.braodcast(broadCastData)
   }
 }
